@@ -1,4 +1,3 @@
-import { create } from "domain";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -20,11 +19,6 @@ html {
 `;
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr)
-  grid-template-areas: 
-  "header header header"
-  "game game game"
-  "keyboard keyboard keyboard";
-  
+  display: flex;
+  flex-direction: column;
 `;
