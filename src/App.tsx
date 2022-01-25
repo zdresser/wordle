@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 function App() {
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState<string[]>([]);
+  // read https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -16,7 +17,8 @@ function App() {
   });
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    const alphaMatch = /^[a-zA-Z]+$/;
+    const alpha = /^[a-zA-Z]+$/;
+
     //check for enter or backspace press
     if (e.key === "Enter") {
       console.log(e.key);
@@ -25,9 +27,9 @@ function App() {
       setCurrentGuess((prev) => prev.slice(0, -1));
       return;
     }
-    //This isn't stopping input after 5 characters nor is it stopping non-letter entries like control or alt
-    if (currentGuess.length < 5 && e.key.match(alphaMatch)) {
-      console.log(currentGuess.length);
+
+    //Limit to 5 chars and only letters
+    if (currentGuess.length < 5 && e.keyCode > 64 && e.keyCode < 91) {
       setCurrentGuess((prev) => prev + e.key.toUpperCase());
     }
   };
